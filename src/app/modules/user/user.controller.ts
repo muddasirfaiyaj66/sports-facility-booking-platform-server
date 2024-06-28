@@ -12,11 +12,8 @@ const createUser = catchAsync(async (req, res) => {
     message: 'User registered successfully',
     data: result,
   })
-});
+})
 
-
-
-export  const UserControllers ={
-    createUser
-
+export const UserControllers = {
+  createUser,
 }
