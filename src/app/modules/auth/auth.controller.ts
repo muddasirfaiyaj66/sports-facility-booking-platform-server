@@ -15,10 +15,10 @@ const loginUser = catchAsync(async(req,res)=>{
       sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'User is logged in successfully!',
+        message: 'User is logged in successfully',
         token:accessToken,
         data: {
-            jwtPayload
+            ...jwtPayload
           
         },
       });
@@ -33,7 +33,7 @@ const changePassword = catchAsync(async (req, res) => {
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Password is updated successfully!',
+      message: 'Password is updated successfully',
       data: result,
     });
   });
@@ -45,7 +45,7 @@ const changePassword = catchAsync(async (req, res) => {
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Access token is retrieved successfully!',
+      message: 'Access token is retrieved successfully',
       data: result,
     });
   });
