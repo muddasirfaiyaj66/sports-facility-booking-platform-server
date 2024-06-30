@@ -9,6 +9,10 @@ const createFacilityIntoDB = async (payload:IFacility)=>{
     
     return result;
 };
+const getAllFacilityFromDB = async ()=>{
+    const result = await Facility.find();
+    return result;
+}
 
 const updateFacilityIntoDB = async(id:string, payload:Partial<IFacility>)=>{
     const result = await Facility.findByIdAndUpdate(id, payload,{new:true});
@@ -25,5 +29,6 @@ const deleteFacilityIntoDB = async(id:string)=>{
 export const FacilityService = {
     createFacilityIntoDB,
     updateFacilityIntoDB,
-    deleteFacilityIntoDB
+    deleteFacilityIntoDB,
+    getAllFacilityFromDB
 }

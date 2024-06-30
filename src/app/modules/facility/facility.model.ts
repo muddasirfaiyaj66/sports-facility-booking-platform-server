@@ -20,4 +20,6 @@ const facilitySchema = new Schema<IFacility>({
   }
 })
 
+
+
 export const Facility = model<IFacility>('Facility', facilitySchema)
