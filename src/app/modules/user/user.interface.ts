@@ -2,18 +2,18 @@ import { Model } from 'mongoose'
 import { USER_ROLE } from './user.constant'
 
 export interface TUser {
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  role: 'admin' | 'user';
-  address: string;
-  isDeleted: boolean;
-  passwordChangedAt?: Date;
+  name: string
+  email: string
+  password: string
+  phone: string
+  role: 'admin' | 'user'
+  address: string
+  isDeleted: boolean
+  passwordChangedAt?: Date
 }
 
 export interface UserModel extends Model<TUser> {
-    isUserExistByEmail(email: string): Promise<TUser>
+  isUserExistByEmail(email: string): Promise<TUser>
 
   isPasswordMatched(
     plainTextPassword: string,
