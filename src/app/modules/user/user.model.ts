@@ -41,7 +41,19 @@ const userSchema = new Schema<TUser, UserModel>(
     timestamps: true,
   },
 )
-
+//query middleware
+userSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+userSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+userSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this
