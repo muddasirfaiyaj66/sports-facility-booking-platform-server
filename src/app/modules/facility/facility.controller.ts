@@ -24,7 +24,7 @@ const updateFacility = catchAsync (async(req,res)=>{
         message:"Facility updated successfully",
         data:result
     })
-})
+});
 
 
 
