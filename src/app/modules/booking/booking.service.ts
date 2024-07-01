@@ -123,9 +123,29 @@ const getAllBookingsFromDB = async () => {
   return result
 }
 
+const cancelABookingFromDB = async (user: string, id: string) => {
+  const data = await Booking.findById(id)
+  if (!data) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Booking not found')
+  }
+  if (data.user.toString() !== user) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      'You have no access to this route',
+    )
+  }
+  const result = await Booking.findByIdAndUpdate(
+    id,
+    { isBooked: 'canceled' },
+    { new: true },
+  ).populate('facility')
+  return result
+}
+
 export const BookingService = {
   createBookingIntoDB,
   checkAvailabilityFromDB,
   getAllBookingsFromDB,
   getUserBookingsFromDB,
+  cancelABookingFromDB,
 }
