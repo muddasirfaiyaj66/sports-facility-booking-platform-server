@@ -1,3 +1,6 @@
+# **Sports Facility Booking Platform**
+
+
 ### **This project** is a comprehensive backend solution for a sports facility booking platform, built using TypeScript, Express.js, and Mongoose. It enables users to easily sign up, log in, and book sports facilities. Key functionalities include:
 
 - **User Management**: Users can register, log in, and manage their profiles. Admins have additional capabilities to manage facilities and view all bookings.
