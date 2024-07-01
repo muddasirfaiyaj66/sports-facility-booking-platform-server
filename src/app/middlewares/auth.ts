@@ -14,7 +14,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
 
     // checking if the token is missing
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You have no access to this route')
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        'You have no access to this route',
+      )
     }
 
     // checking if the given token is valid
@@ -46,11 +49,17 @@ const auth = (...requiredRoles: TUserRole[]) => {
         iat as number,
       )
     ) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You have no access to this route')
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        'You have no access to this route',
+      )
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You have no access to this route')
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        'You have no access to this route',
+      )
     }
 
     req.user = decoded as JwtPayload

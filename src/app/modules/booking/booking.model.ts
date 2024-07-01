@@ -1,44 +1,39 @@
 import { Schema, model } from 'mongoose'
-import { IBooking } from './booking.interface';
-
+import { IBooking } from './booking.interface'
 
 const bookingSchema = new Schema<IBooking>({
-  facility:{
-    type:Schema.Types.ObjectId,
+  facility: {
+    type: Schema.Types.ObjectId,
     required: [true, 'Facility ID  is required'],
-    ref:'Facility'
+    ref: 'Facility',
   },
-  date:{
-    type:String,
+  date: {
+    type: String,
     required: [true, 'Date is required'],
   },
-  startTime:{
-    type:String,
+  startTime: {
+    type: String,
     required: [true, 'StartTime is required'],
   },
-  endTime:{
-    type:String,
+  endTime: {
+    type: String,
     required: [true, 'EndTime is required'],
   },
-  user:{
-    type:Schema.Types.ObjectId,
+  user: {
+    type: Schema.Types.ObjectId,
     required: [true, 'UserID  is required'],
-    ref:'User'
+    ref: 'User',
   },
-  payableAmount:{
-    type:Number,
+  payableAmount: {
+    type: Number,
   },
-  isBooked:{
-    type:String,
+  isBooked: {
+    type: String,
     enum: {
-        values: ['canceled', 'confirmed'],
-        message: '{VALUE} is not valid',
-      },
-  }
-
-});
-
-
-
+      values: ['canceled', 'confirmed'],
+      message: '{VALUE} is not valid',
+    },
+  },
+})
 
 export const Booking = model<IBooking>('Booking', bookingSchema)
