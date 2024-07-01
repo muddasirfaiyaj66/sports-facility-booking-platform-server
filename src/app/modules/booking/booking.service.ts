@@ -106,14 +106,11 @@ const checkAvailabilityFromDB = async (formattedDate: string) => {
 
   const availableSlots = await findAvailableTimeSlots(bookings)
 
-  if (availableSlots.length === 0) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Unavailable Slot')
-  }
-
   return availableSlots
 }
 const getUserBookingsFromDB = async (userId: string) => {
   const result = await Booking.find({ user: userId }).populate('facility')
+
   return result
 }
 

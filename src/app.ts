@@ -1,5 +1,5 @@
 import cookieParser from 'cookie-parser'
-import express, { Request, Response } from 'express'
+import express from 'express'
 import cors from 'cors'
 import { Application } from 'express'
 import notFound from './app/middlewares/notFound'
@@ -15,12 +15,6 @@ app.use(cors({ origin: ['http://localhost:5173'] }))
 //application routes
 
 app.use('/api', router)
-const test = async (req: Request, res: Response) => {
-  const a = 10
-  res.send(a)
-}
-
-app.get('/', test)
 
 app.use(globalErrorHandler)
 //not found route

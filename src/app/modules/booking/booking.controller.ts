@@ -20,7 +20,14 @@ const createBooking = catchAsync(async (req, res) => {
 const getUserBookings = catchAsync(async (req, res) => {
   const user = req.user._id
   const result = await BookingService.getUserBookingsFromDB(user)
-
+  if (!result || result.length === 0) {
+    sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.OK,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -33,6 +40,15 @@ const cancelABooking = catchAsync(async (req, res) => {
   const id = req.params.id
 
   const result = await BookingService.cancelABookingFromDB(user, id)
+
+  if (!result) {
+    sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.OK,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -42,7 +58,14 @@ const cancelABooking = catchAsync(async (req, res) => {
 })
 const getAllBookings = catchAsync(async (req, res) => {
   const result = await BookingService.getAllBookingsFromDB()
-
+  if (result.length === 0) {
+    sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.OK,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -57,6 +80,15 @@ const checkAvailability = catchAsync(async (req, res) => {
   const formattedDate = date.toISOString().split('T')[0]
 
   const result = await BookingService.checkAvailabilityFromDB(formattedDate)
+
+  if (result.length === 0) {
+    sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.OK,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
