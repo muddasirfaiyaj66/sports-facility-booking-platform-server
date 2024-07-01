@@ -17,6 +17,17 @@ const createBooking = catchAsync(async (req, res) => {
   })
 })
 
+const getAllBookings = catchAsync(async (req, res) => {
+  const result = await BookingService.getAllBookingsFromDB()
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Bookings retrieved successfully',
+    data: result,
+  })
+})
+
 const checkAvailability = catchAsync(async (req, res) => {
   const dateParam = req.query.date
   const date = dateParam ? new Date(dateParam as string) : new Date()
@@ -34,4 +45,5 @@ const checkAvailability = catchAsync(async (req, res) => {
 export const BookingController = {
   createBooking,
   checkAvailability,
+  getAllBookings,
 }

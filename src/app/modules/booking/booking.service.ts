@@ -112,8 +112,14 @@ const checkAvailabilityFromDB = async (formattedDate: string) => {
 
   return availableSlots
 }
+const getAllBookingsFromDB = async () => {
+  const result = await Booking.find().populate('facility').populate('user')
+
+  return result
+}
 
 export const BookingService = {
   createBookingIntoDB,
   checkAvailabilityFromDB,
+  getAllBookingsFromDB,
 }
