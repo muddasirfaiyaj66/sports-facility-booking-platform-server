@@ -2,7 +2,7 @@ import httpStatus from 'http-status'
 import catchAsync from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
 import { BookingService } from './booking.service'
-
+import moment from 'moment-timezone'
 const createBooking = catchAsync(async (req, res) => {
   const payload = req.body
   const user = req.user._id
@@ -75,9 +75,23 @@ const getAllBookings = catchAsync(async (req, res) => {
 })
 
 const checkAvailability = catchAsync(async (req, res) => {
-  const dateParam = req.query.date
-  const date = dateParam ? new Date(dateParam as string) : new Date()
-  const formattedDate = date.toISOString().split('T')[0]
+  const queryDate = req.query.date
+  
+  
+  let date
+  if (queryDate) {
+    const parsedDate = new Date(queryDate as string)
+    if (!isNaN(parsedDate.getTime())) {
+      date = parsedDate
+    } else {
+      date = new Date()
+    }
+  } else {
+    date = new Date()
+  }
+  const formattedDate = moment(date).tz('Asia/Dhaka').format('YYYY-MM-DD');
+ 
+  
 
   const result = await BookingService.checkAvailabilityFromDB(formattedDate)
 

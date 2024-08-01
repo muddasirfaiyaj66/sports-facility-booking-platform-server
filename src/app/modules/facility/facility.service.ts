@@ -5,7 +5,8 @@ import { Facility } from './facility.model'
 
 const createFacilityIntoDB = async (payload: IFacility) => {
   const result = await Facility.create(payload)
-
+  
+  
   return result
 }
 const getAllFacilityFromDB = async () => {
